@@ -1,11 +1,17 @@
-module.exports = {
-  'strapi-neon-tech-db-branches': {
-    enabled: true,
+module.exports = ({ env }) => ({
+  upload: {
     config: {
-      neonApiKey: "i250t7s5p4mw0iwjvcdenzu5gqf7o20e6dtcnkh2c678mp2ntujwv5sz6lgo3bmu", // get it from here: https://console.neon.tech/app/settings/api-keys
-      neonProjectName: "ecommerce-lincoln", // the neon project under wich your DB runs
-      neonRole: "neondb_owner", // create it manually under roles for your project first
-      gitBranch: "main" // branch can be pinned via this config option. Will not use branch from git then. Usefull for preview/production deployment
-    }
+      provider: 'cloudinary',
+      providerOptions: {
+        cloud_name: env('CLOUDINARY_NAME'),
+        api_key: env('CLOUDINARY_KEY'),
+        api_secret: env('CLOUDINARY_SECRET'),
+      },
+      actionOptions: {
+        upload: {},
+        uploadStream: {},
+        delete: {},
+      },
+    },
   },
-}
+});
